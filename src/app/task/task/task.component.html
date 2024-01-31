@@ -1,0 +1,49 @@
+<h1>task</h1>
+
+<div *ngFor="let item of tasks; let i=index">
+  <h3>{{item.title}}</h3>
+  <p>{{item.description}}- id: {{item.id}}</p>
+  <p>{{item.completed}}</p>
+  <button (click)="changeTitle(i)">Edit</button>
+  <button *ngIf="item.id!=undefined" (click)="deletePostById(item.id)">Elimina</button>
+  <div *ngIf="item.completed===false">
+    <button (click)="pathTask(item.id!)">Complete task</button>
+  </div>
+  <div *ngIf="item.completed">
+    <button (click)="pathTask(item.id!)">No complete task</button>
+  </div>
+  <div *ngIf="showTaskAdd===true">
+    <h1>Modifica la task</h1>
+    <form [formGroup]="taskForm">
+      <div class="m-3">
+        <label class="form-label"> Metti qui il titolo del tuo post</label>
+        <input class="form-control" type="text" formControlName="title">
+      </div>
+      <div class="m-3">
+        <label class="form-label">Scridi il corpo del tuo post</label>
+        <input class="form-control" type="text" formControlName="description">
+      </div>
+      <button (click)="pathBody(item.id!)" (click)="changeTitle(i)">Invia</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+<div>
+  <h1>Add new task</h1>
+  <form [formGroup]="taskForm">
+    <div class="m-3">
+      <label class="form-label"> Metti qui il titolo del tuo post</label>
+      <input class="form-control" type="text" formControlName="title">
+    </div>
+    <div class="m-3">
+      <label class="form-label">Scridi il corpo del tuo post</label>
+      <input class="form-control" type="text" formControlName="description">
+    </div>
+    <button (click)="addPost()">Invia</button>
+  </form>
+</div>
